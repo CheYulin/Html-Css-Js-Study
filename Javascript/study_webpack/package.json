@@ -1,0 +1,20 @@
+{
+  "name": "study_webpack",
+  "version": "0.0.0",
+  "description": "webpack usage demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server ./index.js bundle.js"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "webpack": "~1.13.3",
+    "webpack-dev-server": "~1.16.2",
+    "css-loader": "~0.26.0",
+    "style-loader": "~0.13.1"
+  },
+  "dependencies": {
+    "jquery": "~3.1.1"
+  }
+}
