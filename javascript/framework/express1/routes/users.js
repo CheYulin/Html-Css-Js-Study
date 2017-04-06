@@ -4,10 +4,10 @@ var router = express.Router();
 /*
  * GET userlist.
  */
-router.get('/userlist', function(req, res) {
+router.get('/userlist', function (req, res) {
     var db = req.db;
     var collection = db.get('userlist');
-    collection.find({},{},function(e,docs){
+    collection.find({}, {}, function (e, docs) {
         res.json(docs);
     });
 });
@@ -15,22 +15,22 @@ router.get('/userlist', function(req, res) {
 /*
  * POST to adduser.
  */
-router.post('/adduser', function(req, res) {
+router.post('/adduser', function (req, res) {
     var db = req.db;
     var collection = db.get('userlist');
-    collection.insert(req.body, function(err, result){
+    collection.insert(req.body, function (err, result) {
         res.send(
-            (err === null) ? { msg: '' } : { msg: err }
+            (err === null) ? {msg: ''} : {msg: err}
         );
     });
 });
 
-router.delete('/deleteuser/:id', function(req, res) {
+router.delete('/deleteuser/:id', function (req, res) {
     var db = req.db;
     var collection = db.get('userlist');
     var userToDelete = req.params.id;
-    collection.remove({ '_id' : userToDelete }, function(err) {
-        res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+    collection.remove({'_id': userToDelete}, function (err) {
+        res.send((err === null) ? {msg: ''} : {msg: 'error: ' + err});
     });
 });
 

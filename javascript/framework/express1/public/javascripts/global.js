@@ -2,7 +2,7 @@
 var userListData = [];
 
 // DOM Ready =============================================================
-$(document).ready(function() {
+$(document).ready(function () {
     $('#btnAddUser').on('click', addUser);
     // Populate the user table on initial page load
     populateTable();
@@ -18,10 +18,10 @@ function populateTable() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON( '/users/userlist', function( data ) {
+    $.getJSON('/users/userlist', function (data) {
         userListData = data;
         // For each item in our JSON, add a table row and cells to the content string
-        $.each(data, function(){
+        $.each(data, function () {
             tableContent += '<tr>';
             tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.username + '">' + this.username + '</a></td>';
             tableContent += '<td>' + this.email + '</td>';
@@ -43,12 +43,14 @@ function addUser(event) {
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
-    $('#addUser input').each(function(index, val) {
-        if($(this).val() === '') { errorCount++; }
+    $('#addUser input').each(function (index, val) {
+        if ($(this).val() === '') {
+            errorCount++;
+        }
     });
 
     // Check and make sure errorCount's still at zero
-    if(errorCount === 0) {
+    if (errorCount === 0) {
 
         // If it is, compile all user info into one object
         var newUser = {
@@ -66,7 +68,7 @@ function addUser(event) {
             data: newUser,
             url: '/users/adduser',
             dataType: 'JSON'
-        }).done(function( response ) {
+        }).done(function (response) {
 
             // Check for successful (blank) response
             if (response.msg === '') {
@@ -104,7 +106,9 @@ function showUserInfo(event) {
     var thisUserName = $(this).attr('rel');
 
     // Get Index of object based on id value
-    var arrayPosition = userListData.map(function(arrayItem) { return arrayItem.username; }).indexOf(thisUserName);
+    var arrayPosition = userListData.map(function (arrayItem) {
+        return arrayItem.username;
+    }).indexOf(thisUserName);
 
     // Get our User Object
     var thisUserObject = userListData[arrayPosition];
@@ -132,7 +136,7 @@ function deleteUser(event) {
         $.ajax({
             type: 'DELETE',
             url: '/users/deleteuser/' + $(this).attr('rel')
-        }).done(function( response ) {
+        }).done(function (response) {
 
             // Check for a successful (blank) response
             if (response.msg === '') {
